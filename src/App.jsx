@@ -6,6 +6,7 @@ import HomePage from './components/home/HomePage'
 import Login from './components/pages/Login'
 import Signup from './components/pages/Signup'
 import Services from './components/service/Services';
+import { Toaster } from 'react-hot-toast';
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
 
   return (
     <Router>
-    
+
+    <Toaster/>
     <Navbar  authenticated={authenticated} setAuthenticated= {setAuthenticated}/>
     
     <div className="container mx-auto p-8">
