@@ -49,7 +49,7 @@ const Navbar = ({ authenticated, setAuthenticated }) => {
             <h1 className="text-lg">MyApp</h1>
           </NavLink>
 
-          {/* Desktop Navigation */}
+          
           <div className="hidden md:flex flex-1 items-center ml-6">
             <div className="flex gap-6 flex-grow">
               {["Home", "About", "Services"].map((item) => (
@@ -91,7 +91,7 @@ const Navbar = ({ authenticated, setAuthenticated }) => {
               </NavLink>
             ))}
 
-            {/* Mobile Authentication Buttons (Vertically Aligned) */}
+            
             <div className="pt-4 border-t border-[#013238] flex justify-center">
               {renderAuthLinks()}
             </div>

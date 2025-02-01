@@ -5,6 +5,7 @@ import About from './components/about/About';
 import HomePage from './components/home/HomePage'
 import Login from './components/pages/Login'
 import Signup from './components/pages/Signup'
+import Services from './components/service/Services';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           
           <Route path="/login" element={<Login  setAuthenticated={setAuthenticated}/>} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/services" element={<Services />} />
            
 
         </Routes>
