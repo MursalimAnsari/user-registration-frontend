@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { login } from '../../services/Service';
+import { login } from '../../api-services/Service';
 
 function Login({ setAuthenticated }) {  
   const [email, setEmail] = useState('');
@@ -15,24 +15,23 @@ function Login({ setAuthenticated }) {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
+  
     try {
       const data = await login(userDetails);  
       setLoading(false);
-
+  
       if (data) {
         setAuthenticated(true);  
         localStorage.setItem('user', JSON.stringify(data));  
         navigate('/'); 
-      } else {
-        setError(data.message || 'Login failed');  
       }
     } catch (error) {
       setLoading(false);
-      setError('An error occurred. Please try again.');  
-      console.error(error);
+      setError(error.message || 'An error occurred. Please try again.');  
+      console.error(error);  
     }
   };
+  
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">

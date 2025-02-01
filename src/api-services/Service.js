@@ -9,20 +9,22 @@ async function postRequest(url, data) {
         'Content-Type': 'application/json',
       },
     });
-    return response.data;
+    return response.data;   
   } catch (error) {
     if (error.response) {
-       
-      if (error.response.data.password) {
-        throw new Error(error.response.data.password);  
-      } else if (error.response.data.message) {
+      
+      if (error.response.data.message) {
         throw new Error(error.response.data.message);  
-      } else {
+      }
+      
+      else {
         throw new Error('An error occurred, please try again');
       }
     } else if (error.request) {
+      
       throw new Error('No response from the server');
     } else {
+      
       throw new Error(error.message);
     }
   }

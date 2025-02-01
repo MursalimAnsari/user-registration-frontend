@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 
 const Navbar = ({ authenticated, setAuthenticated }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     const confirmLogout = window.confirm("Are you sure you want to sign out?");
     if (confirmLogout) {
       setAuthenticated(false);
       localStorage.removeItem("user");
+      navigate("/login")
     }
   };
 
