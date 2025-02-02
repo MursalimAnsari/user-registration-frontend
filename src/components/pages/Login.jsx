@@ -46,29 +46,28 @@ function Login({ setAuthenticated }) {
     }
     }
   };
-
+ 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h1>
-
-        {/* {error && <p className="text-red-500 text-center mb-4">{error}</p>} */}
-
+    <div className="c1 flex items-center justify-center w-96 h-fit mx-auto rounded-lg bg-gray-100">
+      <div className="c2 bg-white p-8 rounded-lg shadow-lg w-96">
+        <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Login Here!</h1>
+  
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email"  className="block text-sm font-medium text-gray-700">
               Email
             </label>
             <input
               type="email"
               id="email"
+              placeholder='johndoe@gmail.com'
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value.toLowerCase())}
               required
-              className="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full p-1.5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm"
             />
           </div>
-
+  
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Password
@@ -76,13 +75,14 @@ function Login({ setAuthenticated }) {
             <input
               type="password"
               id="password"
+              placeholder='e.g 1234'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full p-1.5 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm"
             />
           </div>
-
+  
           <button
             type="submit"
             disabled={loading}
@@ -91,14 +91,17 @@ function Login({ setAuthenticated }) {
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
-
+  
         <p className="text-center mt-4 text-gray-600">
-          Don't have an account?  
+          Don't have an account?
           <Link to="/signup" className="text-blue-500 hover:underline ml-1">Sign up here</Link>.
         </p>
       </div>
     </div>
   );
+  
+  
+
 }
 
 export default Login;

@@ -1,19 +1,17 @@
 import { useState } from "react";
-import { login } from '../../api-services/Service'
+import { register } from "../../api-services/Service";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Toaster, toast } from "react-hot-toast";
 
-export default function Register() {
+export default function SignUp() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
-  
+
     try {
       const userDetails = {
         firstname,
@@ -22,94 +20,83 @@ export default function Register() {
         password,
       };
       const data = await register(userDetails);
-  
+
       // Success case
       toast.success(data.message);
       console.log("User registered:", data);
-  
     } catch (error) {
-      console.error('Registration error:', error);
-      const errorMessage = error?.response?.data?.message || error.message || "Something went wrong. Please try again.";
+      console.error("Registration error:", error);
+      const errorMessage =
+        error?.response?.data?.message || error.message || "Something went wrong. Please try again.";
 
-      toast.error(errorMessage)
+      toast.error(errorMessage);
     }
   };
-  
-  
-  
+
   return (
-    <div className="min-h-screen bg-gray-100 pt-24">
-      {" "}
-      <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg hover:shadow-xl transition-shadow duration-300">
+    <div className="c1 flex items-center justify-center rounded-lg w-96 h-fit mx-auto bg-gray-100">
+      <div className="c2 bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl text-center font-bold mb-6 text-gray-800">
-          Sign up Here!
+          Create an Account Here!
         </h2>
-         
+
         <form onSubmit={handleRegister}>
           <div className="mb-4">
-            <label
-              htmlFor="firstname"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="firstname" className="block text-sm font-medium text-gray-700">
               First Name
             </label>
             <input
               type="text"
+              placeholder='Enter fist name'
               id="firstname"
               value={firstname}
               onChange={(e) => setFirstname(e.target.value)}
-              className="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all hover:border-blue-400"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all hover:border-blue-400 placeholder:text-sm"
               required
             />
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="lastname"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="lastname" className="block text-sm font-medium text-gray-700">
               Last Name
             </label>
             <input
               type="text"
+              placeholder='Enter last name'
               id="lastname"
               value={lastname}
               onChange={(e) => setLastname(e.target.value)}
-              className="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all hover:border-blue-400"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all hover:border-blue-400 placeholder:text-sm"
               required
             />
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email
             </label>
             <input
               type="email"
               id="email"
-              value={email}
+              placeholder='Enter email'
+              value={email.toLowerCase()}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all hover:border-blue-400"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all hover:border-blue-400 placeholder:text-sm"
               required
             />
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Password
             </label>
             <input
               type="password"
+              placeholder='Create password'
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all hover:border-blue-400"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all hover:border-blue-400 placeholder:text-sm"
               required
             />
           </div>
@@ -118,7 +105,7 @@ export default function Register() {
             type="submit"
             className="w-full p-3 mt-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-colors"
           >
-            Register
+            Sign Up
           </button>
         </form>
 
@@ -129,17 +116,7 @@ export default function Register() {
           </Link>
         </p>
 
-        <ToastContainer
-          position="top-center"
-          autoClose={3000}
-          hideProgressBar={true}
-          newestOnTop={true}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+        <Toaster position="top-center" reverseOrder={false} />
       </div>
     </div>
   );

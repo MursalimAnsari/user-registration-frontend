@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { toast } from 'react-hot-toast';
 
 const Navbar = ({ authenticated, setAuthenticated }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
