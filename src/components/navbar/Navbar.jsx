@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
+import { toast } from 'react-hot-toast';
 
 const Navbar = ({ authenticated, setAuthenticated }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -15,14 +16,36 @@ const Navbar = ({ authenticated, setAuthenticated }) => {
     }
   }, []);
   
-  const handleLogout = () => {
-    const confirmLogout = window.confirm("Are you sure you want to sign out?");
-    if (confirmLogout) {
-      setAuthenticated(false);
-      localStorage.removeItem("user");
-      navigate("/login");
-    }
-  };
+
+const handleLogout = () => {
+   
+  toast((t) => (
+    <div className="p-4 flex flex-col items-center space-y-4">
+      <p className="text-lg font-semibold">Are you sure you want to sign out?</p>
+      <div className="flex space-x-4">
+        <button
+          onClick={() => {
+            setAuthenticated(false);
+            localStorage.removeItem("user");
+            navigate("/login");
+            toast.dismiss(t.id);  
+          }}
+          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none"
+        >
+          Confirm
+        </button>
+        <button
+          onClick={() => toast.dismiss(t.id)}
+          className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 focus:outline-none"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  ));
+  
+};
+
 
   const navLinkClass = ({ isActive }) =>
     `flex items-center gap-2 relative transition-all duration-300 ease-in-out ${
@@ -88,7 +111,7 @@ const Navbar = ({ authenticated, setAuthenticated }) => {
             )}
           </button>
         </div>
-
+        
         {isMenuOpen && (
           <div className="md:hidden mt-4 space-y-4">
             {["Home", "About", "Services"].map((item) => (
